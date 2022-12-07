@@ -11,9 +11,10 @@
   },
   "dependencies": {
     "@react-native-masked-view/masked-view": "^0.2.8",
-    "@react-navigation/bottom-tabs": "^6.4.3",
+    "@react-navigation/bottom-tabs": "^6.5.0",
     "@react-navigation/drawer": "^6.5.3",
     "@react-navigation/native": "^6.0.16",
+    "@react-navigation/native-stack": "^6.9.5",
     "@react-navigation/stack": "^6.3.7",
     "@types/styled-components": "^5.1.26",
     "@types/styled-components-react-native": "^5.2.0",

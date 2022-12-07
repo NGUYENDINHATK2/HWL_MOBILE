@@ -4,7 +4,7 @@ import { View, Text, SafeAreaView } from 'react-native';
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/RootStack';
-
+import {GIFJSON} from '../constrain';
 import LottieView from 'lottie-react-native';
 import {colors}  from '../color'
 
@@ -12,7 +12,7 @@ export type WelcomeNavigationProps = StackScreenProps<RootStackParamList, "Welco
 //?components
 const WelcomeScreenContainer = styled.View`
   flex: 1;
-  background-color:	${colors.darkgalaxy};
+  background-color:	${colors.darkGalaxy};
   align-items: center;
   justify-content: center;
 `;
@@ -42,7 +42,7 @@ const WelcomeScreen: FunctionComponent = () => {
           Welcome to the Galaxy HWL.
         </TitleNeon>
         <LottieView
-          source={Loading}
+          source={GIFJSON.Loading}
           autoPlay
           loop
           style={{ width: 300, height: 300 }}
