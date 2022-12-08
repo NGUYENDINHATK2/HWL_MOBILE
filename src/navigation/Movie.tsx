@@ -3,23 +3,20 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Image } from 'react-native';
 import LottieView from 'lottie-react-native';
 //?import screens
-import HomeStorySpaceScreen from '../screens/StorySpace/HomeStorySpaceScreen';
-import SearchStoryScreen from '../screens/StorySpace/SearchStoryScreen';
-import FavoriteStoryScreen from '../screens/StorySpace/FavoriteStoryScreen';
+import HomeMovideSpaceScreen from '../screens/MovieSpace/HomeMovideSpaceScreen';
+
 export type StoryBottomParamList = {
-    HomeStory: undefined;
-    SearchStory: undefined;
-    FavoriteStory: undefined;
+    HomeMovie: undefined;
 };
 //?types
 import { IMAGE, GIFJSON } from '../constrain';
 import { colors } from '../color';
 interface Props { }
 const Tab = createBottomTabNavigator<StoryBottomParamList>();
-const StoryNavihation: FunctionComponent<Props> = ({ }) => {
+const MovieNavihation: FunctionComponent<Props> = ({ }) => {
     return (
         <Tab.Navigator
-            initialRouteName="HomeStory"
+            initialRouteName="HomeMovie"
             screenOptions={{
                 tabBarStyle: {
                     backgroundColor: colors.lightGalaxy,
@@ -51,44 +48,20 @@ const StoryNavihation: FunctionComponent<Props> = ({ }) => {
                         />
                     ),
                 }}
-                name="HomeStory" component={HomeStorySpaceScreen} />
-            <Tab.Screen
-                options={{
-                    headerShown: false,
-                    tabBarLabel: 'Favorite',
-                    tabBarIcon: ({ color, size }) => (
-                        <Image
-                            source={IMAGE.Search}
-                            style={[styles.sizeIcon]}
-                        />
-                    ),
-                }}
-                name="SearchStory" component={SearchStoryScreen} />
-            <Tab.Screen
-                options={{
-                    headerShown: false,
-                    tabBarLabel: 'Favorite',
-                    tabBarIcon: ({ color, size }) => (
-                        <Image
-                            source={IMAGE.Star}
-                            style={[styles.sizeIcon]}
-                        />
-                    ),
-                }}
-                name="FavoriteStory" component={FavoriteStoryScreen} />
+                name="HomeMovie" component={HomeMovideSpaceScreen} />
         </Tab.Navigator>
     );
 }
 
-export default StoryNavihation;
+export default MovieNavihation;
 
 const styles = StyleSheet.create({
     homeSizeIcon: {
-        width: 30,
-        height: 30,
+        width: 35,
+        height: 35,
     },
     sizeIcon: {
-        width: 25,
-        height: 25,
+        width: 30,
+        height: 30,
     }
 })

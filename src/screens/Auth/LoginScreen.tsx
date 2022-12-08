@@ -12,8 +12,7 @@ import FormLoginSection from '../../components/FormLogin/FormLoginSection';
 
 const LoginScreenContainer = styled.View`
     flex: 1;
-    // background-color: ${colors.darkGalaxy};
-    background-color: ${colors.darkGalaxy};
+    background-color: ${colors.darkGalaxy1};
 `;
 const LoginTitle = styled.Text`
     font-size: 40px;

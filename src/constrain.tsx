@@ -4,6 +4,10 @@ export const GIFJSON = {
     ImageGalaxy: require('./assets/json/4441-galaxy-orbit-animation.json'),
     Loading: require('./assets/json/lf30_editor_mqh2qjpr.json'),
     IconHome: require('./assets/json/Home.json'),
+    MenuDrawer: require('./assets/json/Hambuger_menu.json'),
+    OpenBook: require('./assets/json/openbook.json'),
+    Movie: require('./assets/json/movie_ 3.json'),
+    Music : require('./assets/json/Youtube_Music.json'),
 }
 export const IMAGE = {
     Eye: require('./assets/icon/16672732291582692233-256.png'),
@@ -13,4 +17,5 @@ export const IMAGE = {
     Home: require('./assets/icon/6001470221615200896-128.png'),
     Star : require('./assets/icon/star.png'),
     Search : require('./assets/icon/search-interface-symbol.png'),
+    Down : require('./assets/icon/down-filled-triangular-arrow.png'),
 }

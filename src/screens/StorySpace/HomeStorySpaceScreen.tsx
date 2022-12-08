@@ -14,6 +14,7 @@ const HomeStorySpaceScreenContainer = styled.View`
     flex: 1;
     width: 100%;
     background-color: ${colors.darkGalaxy};
+    padding: 10px 10px 50px 10px;
 `;
 
 //?typed
