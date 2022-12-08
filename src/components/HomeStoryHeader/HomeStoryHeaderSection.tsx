@@ -9,9 +9,9 @@ const HomeStoryHeaderSectionContainer = styled.View`
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    padding: 0px 2px 8px;
+    padding: 0px 10px 8px;
     border-bottom-width: 0.2px;
-    border-bottom-color: 'gray';
+    border-bottom-color: gray;
 `;
 const TitleSection = styled.Text`
     color: #fff;
@@ -21,7 +21,6 @@ const TitleSection = styled.Text`
 const IConSearch = styled.Image`
     width: 25px;
     height: 25px;
-    transform: rotate(0deg);
 `;
 //?type
 import { GIFJSON, IMAGE } from '../../constrain';
@@ -30,6 +29,7 @@ import { HomeStoryHeaderProps } from './types';
 
 const HomeStoryHeaderSection: FunctionComponent<HomeStoryHeaderProps> = (props) => {
     const navigation = useNavigation<HomeStoryNavigationProps>();
+    const {hiddenSearchBar,setHiddenSearchBar} = props;
     return (
         <HomeStoryHeaderSectionContainer>
             <TouchableOpacity onPress={() => {
@@ -45,7 +45,7 @@ const HomeStoryHeaderSection: FunctionComponent<HomeStoryHeaderProps> = (props) 
             </TouchableOpacity>
             <TitleSection>Have a nice day</TitleSection>
             <TouchableOpacity onPress={() => {
-                navigation.openDrawer();
+                setHiddenSearchBar(!hiddenSearchBar);
             }}>
                 <IConSearch
                     source={IMAGE.Search}
