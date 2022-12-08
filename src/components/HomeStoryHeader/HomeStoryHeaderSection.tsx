@@ -10,8 +10,8 @@ const HomeStoryHeaderSectionContainer = styled.View`
     width: 100%;
     align-items: center;
     padding: 0px 10px 8px;
-    border-bottom-width: 0.2px;
-    border-bottom-color: gray;
+    // border-bottom-width: 0.2px;
+    // border-bottom-color: gray;
 `;
 const TitleSection = styled.Text`
     color: #fff;

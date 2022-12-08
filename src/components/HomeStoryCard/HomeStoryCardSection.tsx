@@ -6,6 +6,9 @@ import { colors } from '../../color';
 import NewStoryItem from './NewStoryItem';
 const HomeStoryCardSectionContainer = styled.View`
     margin-top: 10px;
+    border-bottom-width: 0.2px;
+    padding-bottom: 20px;
+    border-bottom-color: ${colors.gray};
 `;
 const Title = styled.Text`
     font-size: 18px;

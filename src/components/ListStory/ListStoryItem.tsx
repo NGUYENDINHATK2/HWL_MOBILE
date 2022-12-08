@@ -4,23 +4,20 @@ import { View, Text, Dimensions, TouchableOpacity, TouchableHighlight } from 're
 import { colors } from '../../color';
 const { width, height } = Dimensions.get('window');
 //?component
-const NewStoryItemBackground = styled.ImageBackground`
-    border-radius: 20px;
+const StoryItemBackground = styled.ImageBackground`
+    border-radius: 10px;
     margin: 10px 10px 0px ;
 `;
-const NewStoryItemContainer = styled.View`
-    width: ${width - 20}px;
+const StoryItemContainer = styled.View`
+    width: ${width/3 }px;
     height: 200px;
-    padding: 20px;
 `;
 const InFoSContainer = styled.View`
     background-color: rgba(0,0,0,0.5);
-    width: 80%;
+    width: 100%;
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    border-radius: 20px;
-    padding: 10px 20px;
+    bottom: 0px;
+    padding: 10px 10px;
 `;
 const NameStory = styled.Text`
     color: ${colors.white};
@@ -38,29 +35,28 @@ const Description = styled.Text`
     font-weight: bold;
 `;
 
-//?types
-import { NewStoryProps } from './types';
+import { StoryItemProps } from './types';
 
-const NewStoryItem: FunctionComponent<NewStoryProps> = (props) => {
+const ListStoryItem: FunctionComponent<StoryItemProps> = (props) => {
     return (
         <TouchableOpacity onPress={() => { }}>
-            <NewStoryItemBackground
+            <StoryItemBackground
                 source={{ uri: props.image }}
                 imageStyle={{
                     overflow: 'hidden',
-                    borderRadius: 20,
+                    borderRadius: 10,
                 }}
             >
-                <NewStoryItemContainer>
+                <StoryItemContainer>
                     <InFoSContainer>
-                        <NameStory numberOfLines={1}>{props.name}</NameStory>
+                        <NameStory numberOfLines={2}>{props.name}</NameStory>
                         <ReleaseDate>{props.release_date}</ReleaseDate>
                         <Description numberOfLines={2}>{props.description}</Description>
                     </InFoSContainer>
-                </NewStoryItemContainer>
-            </NewStoryItemBackground>
+                </StoryItemContainer>
+            </StoryItemBackground>
         </TouchableOpacity>
     );
 }
 
-export default NewStoryItem;
+export default ListStoryItem;
