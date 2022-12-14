@@ -7,11 +7,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AuthNavigation from './Auth';
 import MainNavigation from './Main';
+import DetailsStoryScreen from '../screens/StorySpace/DetailsStoryScreen';
 //?type
 export type RootStackParamList = {
     WelcomeScreen: undefined;
     Auth: undefined;
     Main: undefined;
+    DetailsStoryScreen: undefined;
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -32,6 +34,9 @@ const RootStack: FunctionComponent = () => {
                 <Stack.Screen
                     options={{ headerShown: false }}
                     name="Main" component={MainNavigation} />
+                <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="DetailsStoryScreen" component={DetailsStoryScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

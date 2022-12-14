@@ -41,6 +41,9 @@ const QuickSelectionMenuSection: FunctionComponent<QuickSelectionMenuProps> = (p
                 <StatusText>Status</StatusText>
                 <StatusItemContainer horizontal={true} showsHorizontalScrollIndicator={false}>
                     <StatusItem>
+                        <StatusItemText>Hot</StatusItemText>
+                    </StatusItem>
+                    <StatusItem>
                         <StatusItemText>Active</StatusItemText>
                     </StatusItem>
                     <StatusItem>

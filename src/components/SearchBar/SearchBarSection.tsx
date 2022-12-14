@@ -13,6 +13,7 @@ const SearchBarSectionContainer = styled.View`
     align-items: center;
     padding-left: 10px;
     padding-right: 30px;
+    margin-bottom: 10px;
 `;
 const IconSearchContainer = styled.View`
     width: 10%;

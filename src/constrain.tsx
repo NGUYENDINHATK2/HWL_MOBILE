@@ -8,6 +8,7 @@ export const GIFJSON = {
     OpenBook: require('./assets/json/openbook.json'),
     Movie: require('./assets/json/movie_ 3.json'),
     Music : require('./assets/json/Youtube_Music.json'),
+    SUCCESS : require('./assets/json/95029-success.json'),
 }
 export const IMAGE = {
     Eye: require('./assets/icon/16672732291582692233-256.png'),
@@ -18,4 +19,8 @@ export const IMAGE = {
     Star : require('./assets/icon/star.png'),
     Search : require('./assets/icon/search-interface-symbol.png'),
     Down : require('./assets/icon/down-filled-triangular-arrow.png'),
+    EyeView : require('./assets/icon/eye.png'),
+    RightArrow : require('./assets/icon/right-arrow.png'),
+    LeftArrow : require('./assets/icon/left-arrow.png'),
+    StarRating : require('./assets/icon/starrating.png'),
 }

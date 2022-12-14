@@ -3,8 +3,10 @@ export interface NewChapterProps{
     idStory:string;
     nameStory:string;
     nameChapter:string;
+    image:string;
+    description:string;
     timeAgo:string;
-    chapter :number;
+    chapter :string;
 }
 
 export interface ListNewChapterProps {

@@ -8,8 +8,10 @@ import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type { DrawerScreenProps } from '@react-navigation/drawer';
 import { MainDrawerParamList } from '../../navigation/Main';
 import { StoryBottomParamList } from '../../navigation/Story';
+import { RootStackParamList } from '../../navigation/RootStack';
 import { colors } from '../../color';
 //?components
+import ModalLoading from '../ModalLoading';
 import HomeStoryHeaderSection from '../../components/HomeStoryHeader/HomeStoryHeaderSection';
 import SearchBarSection from '../../components/SearchBar/SearchBarSection';
 import HomeStoryCardSection from '../../components/HomeStoryCard/HomeStoryCardSection';
@@ -28,8 +30,11 @@ const HomeStorySpaceScreenContainer = styled.View`
 
 interface Props { }
 export type HomeStoryScreenNavigationProps = CompositeNavigationProp<
-  BottomTabScreenProps<StoryBottomParamList, "HomeStory">["navigation"],
-  DrawerScreenProps<MainDrawerParamList, "StoryNavihation">["navigation"]
+  NativeStackNavigationProp<RootStackParamList, 'Main'>,
+  CompositeNavigationProp<
+    BottomTabScreenProps<StoryBottomParamList, "HomeStory">["navigation"],
+    DrawerScreenProps<MainDrawerParamList, "StoryNavihation">["navigation"]
+  >
 >;
 
 interface NewChapterItem {
@@ -37,8 +42,10 @@ interface NewChapterItem {
   idStory: string;
   nameStory: string;
   nameChapter: string;
+  image: string;
+  description: string;
   timeAgo: string;
-  chapter: number;
+  chapter: string;
 }
 
 const HomeStorySpaceScreen: FunctionComponent<Props> = () => {
@@ -53,7 +60,12 @@ const HomeStorySpaceScreen: FunctionComponent<Props> = () => {
     );
     return () => backHandler.remove();
   }, []);
-
+  React.useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  }, []);
+  const [loading, setLoading] = React.useState<boolean>(true);
   const [hiddenSearchBar, setHiddenSearchBar] = React.useState<boolean>(true);
   const listNewStory = [
     {
@@ -82,22 +94,36 @@ const HomeStorySpaceScreen: FunctionComponent<Props> = () => {
     {
       id: '1',
       idStory: '1',
-      nameStory: 'Tây hành kỷ III',
-      nameChapter: 'Chương 1',
+      nameStory: 'Tây Du I',
+      nameChapter: 'TÂY DU - CHAPTER 1: RỒNG VÀ SÓI',
+      image: 'https://s1.boctem.com/wp-content/uploads/2021/06/105248.jpg',
+      description: 'Khởi đầu của đại kiếp',
       timeAgo: '1 giờ trước',
-      chapter: 1
+      chapter: '1'
     },
     {
       id: '2',
       idStory: '2',
-      nameStory: 'Doremon Nước Nhật Thời Nguyên Thuỷ',
-      nameChapter: 'Chương 1',
+      nameStory: 'Ma Quân Bá Sủng',
+      nameChapter: 'Ma Quân Bá Sủng, Thiên Tài Manh Bảo Phúc Hắc Mẫu Thân – Chap 1 & 2',
+      image: 'https://f8-zpcloud.zdn.vn/161838790465487699/46d41075eef337ad6ee2.jpg',
+      description: 'Xuyên không bất ngờ',
       timeAgo: '1 giờ trước',
-      chapter: 1
+      chapter: '1 & 2'
+    },
+    {
+      id: '3',
+      idStory: '1',
+      nameStory: 'Tây Du I',
+      nameChapter: 'TÂY DU - CHAPTER 2: LONG VƯƠNG THẦN TƯỚNG',
+      image: 'https://f8-zpcloud.zdn.vn/5206149356392843355/5844c7f32975f02ba964.jpg',
+      description: 'Thủ hộ kỳ kinh',
+      timeAgo: '1 giờ trước',
+      chapter: '2'
     },
   ];
 
-  return (
+  return loading ? <ModalLoading /> : (
     <HomeStorySpaceScreenContainer>
       <HomeStoryHeaderSection
         hiddenSearchBar={hiddenSearchBar}
@@ -114,7 +140,7 @@ const HomeStorySpaceScreen: FunctionComponent<Props> = () => {
         <ListStorySection title='China' data={listNewStory} />
       </ScrollView>
     </HomeStorySpaceScreenContainer>
-  );
+  )
 }
 
 export default HomeStorySpaceScreen;
