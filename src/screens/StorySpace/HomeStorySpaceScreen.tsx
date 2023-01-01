@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import styled from 'styled-components/native';
 import { BackHandler } from 'react-native';
 import { View, ScrollView } from 'react-native';
-import { useNavigation, CompositeNavigationProp } from '@react-navigation/native'
+import { CompositeNavigationProp } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import type { DrawerScreenProps } from '@react-navigation/drawer';
@@ -10,6 +10,7 @@ import { MainDrawerParamList } from '../../navigation/Main';
 import { StoryBottomParamList } from '../../navigation/Story';
 import { RootStackParamList } from '../../navigation/RootStack';
 import { colors } from '../../color';
+
 //?components
 import ModalLoading from '../ModalLoading';
 import HomeStoryHeaderSection from '../../components/HomeStoryHeader/HomeStoryHeaderSection';
@@ -19,11 +20,12 @@ import ListStorySection from '../../components/ListStory/ListStorySection';
 import StoryFollowSection from '../../components/StoryFollow/StoryFollowSection';
 import QuickSelectionMenuSection from '../../components/QuickSelectionMenu/QuickSelectionMenuSection';
 import ListNewChapterSection from '../../components/ListNewChapter/ListNewChapterSection';
+import ViewBottomTabBar from '../../components/ViewBottomTabBar';
 const HomeStorySpaceScreenContainer = styled.View`
     flex: 1;
     width: 100%;
     background-color: ${colors.darkGalaxy};
-    padding: 10px 0px 50px 0px;
+    padding: 10px 0px 0px 0px;
 `;
 
 //?typed
@@ -138,7 +140,9 @@ const HomeStorySpaceScreen: FunctionComponent<Props> = () => {
         <StoryFollowSection />
         <ListStorySection title='Anime' data={listNewStory} />
         <ListStorySection title='China' data={listNewStory} />
+        <ViewBottomTabBar/>
       </ScrollView>
+
     </HomeStorySpaceScreenContainer>
   )
 }

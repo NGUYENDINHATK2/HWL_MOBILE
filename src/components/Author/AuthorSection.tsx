@@ -14,6 +14,7 @@ const FlatListAuthor = styled.FlatList`
 
 //?types
 import { AuthorProps } from './types';
+import ViewBottomTabBar from '../ViewBottomTabBar';
 
 const AuthorSection: FunctionComponent<AuthorProps> = (props) => {
     const { data } = props;
@@ -21,7 +22,7 @@ const AuthorSection: FunctionComponent<AuthorProps> = (props) => {
         <AuthorSectionContainer>
             <FlatListAuthor
                 data={data}
-                // ListFooterComponent={() => <View style={{ height: 100 }} />}
+                ListFooterComponent={() => <ViewBottomTabBar/>}
                 showsHorizontalScrollIndicator={false}
                 renderItem={({ item }: any) => <AuthorItem {...item} />}
                 keyExtractor={({ id }: any) => id.toString()}

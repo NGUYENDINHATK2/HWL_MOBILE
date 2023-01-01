@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components/native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useBottomTabBarHeight } from '@react-navigation/bottom-tabs';
+
 import { useNavigation, CompositeNavigationProp } from '@react-navigation/native'
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
@@ -25,6 +25,7 @@ const Title = styled.Text`
   font-size:20px;
   font-weight:bold;
 `;
+const ViewBottomTabBar = styled.View``;
 //?types
 interface Props { }
 export type FavoriteStoryScreenNavigationProps = CompositeNavigationProp<
@@ -37,7 +38,6 @@ export type FavoriteStoryScreenNavigationProps = CompositeNavigationProp<
 const FavoriteStoryScreen: FunctionComponent<Props> = ({ }) => {
   const [indexMenu, setIndexMenu] = React.useState(0);
   const [loading, setLoading] = React.useState<boolean>(true);
-  const heightBottomTabBar = useBottomTabBarHeight();
   React.useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -53,7 +53,7 @@ const FavoriteStoryScreen: FunctionComponent<Props> = ({ }) => {
   };
   return loading ? <ModalLoading /> :
     <FavoriteStoryScreenContainer style={{
-      paddingBottom: heightBottomTabBar
+      // paddingBottom: heightBottomTabBar
     }}>
       {renderTitle()}
       <BodyFavoriteStorySection

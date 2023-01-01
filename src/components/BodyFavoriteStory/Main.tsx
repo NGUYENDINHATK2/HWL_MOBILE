@@ -47,6 +47,7 @@ const IconDownUp = styled.Image`
 //?types
 interface Props { }
 import { GIFJSON, IMAGE } from '../../constrain';
+import ViewBottomTabBar from '../ViewBottomTabBar';
 const Main: FunctionComponent<Props> = (props) => {
     const [isShowChapter, setIsShowChapter] = React.useState(true);
     const [isShowStory, setIsShowStory] = React.useState(true);
@@ -183,6 +184,7 @@ const Main: FunctionComponent<Props> = (props) => {
                 <MainContent>
                     {isShowStory ? renderListStory() : null}
                 </MainContent>
+                <ViewBottomTabBar/>
             </ScrollView>
             <BottomPopup
                 visible={visible}
