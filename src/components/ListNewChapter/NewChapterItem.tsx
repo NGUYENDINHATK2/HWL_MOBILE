@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components/native';
 import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import { colors } from '../../color';
 const { width } = Dimensions.get('window');
 //?components
@@ -48,10 +49,14 @@ const Description = styled.Text`
 `;
 //?types
 import { NewChapterProps } from './types';
-
+import {HomeStoryScreenNavigationProps as HomeStoryNavigationProps} from '../../screens/StorySpace/HomeStorySpaceScreen';
 const NewChapterItem: FunctionComponent<NewChapterProps> = (props) => {
+  const navigation = useNavigation<HomeStoryNavigationProps>();
+  const handlePress = () =>{
+    navigation.navigate('DetailsChapterScreen')
+  }
   return (
-    <TouchableOpacity onPress={() => { }}>
+    <TouchableOpacity onPress={handlePress}>
       <StoryItemBackground
         source={{ uri: props.image }}
         imageStyle={{

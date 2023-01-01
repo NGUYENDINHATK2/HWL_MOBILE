@@ -22,16 +22,19 @@ const StoryNavihation: FunctionComponent<Props> = ({ }) => {
             initialRouteName="HomeStory"
             screenOptions={{
                 tabBarStyle: {
-                    backgroundColor: colors.lightGalaxy,
+                    backgroundColor: colors.violetDark,
                     position: 'absolute',
                     paddingVertical: 0,
                     height: 50,
                     alignItems: 'center',
+                    borderTopRightRadius: 20,
+                    borderTopLeftRadius: 20,
+                    borderTopWidth: 0,
                 },
-                tabBarInactiveTintColor: '#fff',
-                tabBarActiveTintColor: '#fff',
-                tabBarActiveBackgroundColor: 'rgba(255, 255, 255, 0.15)',
-                tabBarInactiveBackgroundColor: 'rgba(255, 255, 255, 0.05)',
+                // tabBarInactiveTintColor: '#fff',
+                // tabBarActiveTintColor: '#fff',
+                // tabBarActiveBackgroundColor: 'rgba(255, 255, 255, 0.15)',
+                // tabBarInactiveBackgroundColor: 'rgba(255, 255, 255, 0.05)',
                 tabBarShowLabel: false,
                 tabBarLabelStyle: { fontWeight: 'bold' },
                 tabBarAccessibilityLabel: 'hide lable when Inactive',
@@ -41,10 +44,10 @@ const StoryNavihation: FunctionComponent<Props> = ({ }) => {
                 options={{
                     headerShown: false,
                     tabBarLabel: 'Home',
-                    tabBarIcon: ({ color, size }) => (
+                    tabBarIcon: ({ color, size, focused }) => (
                         <LottieView
-                            source={GIFJSON.IconHome}
-                            autoPlay
+                            source={GIFJSON.IconHomeActive}
+                            autoPlay={focused}
                             loop
                             style={[styles.homeSizeIcon]}
                             speed={0.4}
@@ -56,10 +59,18 @@ const StoryNavihation: FunctionComponent<Props> = ({ }) => {
                 options={{
                     headerShown: false,
                     tabBarLabel: 'Favorite',
-                    tabBarIcon: ({ color, size }) => (
-                        <Image
-                            source={IMAGE.Search}
-                            style={[styles.sizeIcon]}
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <LottieView
+                            source={
+                                focused ? GIFJSON.Search:GIFJSON.IconSearchInactived
+                            }
+                            autoPlay={focused}
+                            loop
+                            style={{
+                                width: 80,
+                                height: 80,
+                            }}
+                            speed={0.5}
                         />
                     ),
                 }}
@@ -68,10 +79,16 @@ const StoryNavihation: FunctionComponent<Props> = ({ }) => {
                 options={{
                     headerShown: false,
                     tabBarLabel: 'Favorite',
-                    tabBarIcon: ({ color, size }) => (
-                        <Image
-                            source={IMAGE.Star}
-                            style={[styles.sizeIcon]}
+                    tabBarIcon: ({ color, size, focused }) => (
+                        <LottieView
+                            source={GIFJSON.IconStack}
+                            autoPlay={focused}
+                            loop
+                            style={{
+                                width: 60,
+                                height: 60,
+                            }}
+                            speed={0.8}
                         />
                     ),
                 }}
@@ -84,8 +101,8 @@ export default StoryNavihation;
 
 const styles = StyleSheet.create({
     homeSizeIcon: {
-        width: 30,
-        height: 30,
+        width: 35,
+        height: 35,
     },
     sizeIcon: {
         width: 25,

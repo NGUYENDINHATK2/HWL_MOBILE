@@ -8,5 +8,17 @@
     "types": [
       "styled-components-react-native"
     ], /* Skip type checking all .d.ts files. */
-  }
+    // paper 
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "lib": ["es6"],
+    "moduleResolution": "node",
+    "noEmit": true,
+    "strict": true,
+    "target": "esnext"
+  },
+  "exclude": ["node_modules"]
 }

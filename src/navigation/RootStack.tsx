@@ -8,12 +8,14 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import AuthNavigation from './Auth';
 import MainNavigation from './Main';
 import DetailsStoryScreen from '../screens/StorySpace/DetailsStoryScreen';
+import DetailsChapterScreen from '../screens/StorySpace/DetailsChapterScreen';
 //?type
 export type RootStackParamList = {
     WelcomeScreen: undefined;
     Auth: undefined;
     Main: undefined;
     DetailsStoryScreen: undefined;
+    DetailsChapterScreen: undefined;
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -37,6 +39,9 @@ const RootStack: FunctionComponent = () => {
                 <Stack.Screen
                     options={{ headerShown: false }}
                     name="DetailsStoryScreen" component={DetailsStoryScreen} />
+                <Stack.Screen
+                    options={{ headerShown: false }}
+                    name="DetailsChapterScreen" component={DetailsChapterScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );

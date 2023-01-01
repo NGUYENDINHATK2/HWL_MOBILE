@@ -98,7 +98,7 @@ const DetailsStoryHeaderSection: FunctionComponent<DetailsStoryHeaderSectionProp
                         <InfoStory>
                             <NameStory numberOfLines={2}>Truyện tranh Doremon </NameStory>
                             <AuthorStory numberOfLines={1}>Author: Fujiko F. Fujio</AuthorStory>
-                            <RatingSection numberRating={2} />
+                            <RatingSection numberRating={4} />
                             <DescriptionStory numberOfLines={4}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                                 Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit.

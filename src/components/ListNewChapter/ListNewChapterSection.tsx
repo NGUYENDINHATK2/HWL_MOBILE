@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from 'react';
 import styled from 'styled-components/native';
 import { View, Text } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import { colors } from '../../color';
 //?components
 import NewChapterItem from './NewChapterItem';
