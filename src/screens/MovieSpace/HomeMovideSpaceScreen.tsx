@@ -10,19 +10,26 @@ const HomeMovideSpaceScreenContainer = styled.View`
   flex:1;
   background-color:#000;
 `;
+const VideoContainer = styled.View`
+  width:100%;
+  height:30%;
+  padding:10px 0;
+`;
 //?types
 interface Props { }
 
-const HomeMovideSpaceScreen: FunctionComponent<Props> = ({ }) => {
+const HomeMovideSpaceScreen: FunctionComponent<Props> = () => {
   return (
     <HomeMovideSpaceScreenContainer >
+      <VideoContainer>
+        <VideoPlaySection />
+      </VideoContainer>
       <VideoPlayer
-        video={{ uri: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4' }}
+        video={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
         videoWidth={1600}
         videoHeight={900}
         thumbnail={{ uri: 'https://i.picsum.photos/id/866/1600/900.jpg' }}
         showDuration
-        // rewind video
       />
     </HomeMovideSpaceScreenContainer>
   );
