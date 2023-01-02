@@ -29,6 +29,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   const [isPlaying, setIsPlaying] = React.useState<boolean>(true);
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
   const [isMuted, setIsMuted] = React.useState<boolean>(false);
+  const [isSeeking, setIsSeeking] = React.useState<boolean>(false);
   const [durationVideo, setDurationVideo] = React.useState<any>(0);
   const [progress, setProgress] = React.useState<any>(0);
   const [duration, setDuration] = React.useState<any>(0);
@@ -81,6 +82,25 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
       setIsShowMenu={setIsShowMenu}
     />
   }
+  const onSeekStartResponder = () => {
+    return true;
+  }
+  const onSeekGrant = (e: any) => {
+    console.log('onSeekGrant');
+    setIsSeeking(true);
+    setIsPaused(true);
+  }
+  const onSeek = (e: any) => {
+    console.log('onSeek');
+   
+  }
+  const onSeekRelease = () => {
+    console.log('onSeekRelease');
+    setIsSeeking(false);
+    setIsPaused(false);
+    // player.current?.seek(progress * duration);
+
+  }
   const renderSeekBar = (fullWidth: boolean) => {
     return (
       <View
@@ -96,21 +116,20 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
           ]}
         />
         {
-           isShowMenu ? (
+          isShowMenu ? (
             <View
-            style={[
-              styles.seekBarKnob,
-              
-            ]}
-            hitSlop={{ top: 20, bottom: 20, left: 10, right: 20 }}
-            // onStartShouldSetResponder={this.onSeekStartResponder}
-            // onMoveShouldSetPanResponder={this.onSeekMoveResponder}
-            // onResponderGrant={this.onSeekGrant}
-            // onResponderMove={this.onSeek}
-            // onResponderRelease={this.onSeekRelease}
-            // onResponderTerminate={this.onSeekRelease}
-          />
-          ):null
+              style={[
+                styles.seekBarKnob,
+
+              ]}
+              hitSlop={{ top: 20, bottom: 20, left: 10, right: 20 }}
+              onStartShouldSetResponder={onSeekStartResponder}
+              onResponderGrant={onSeekGrant}
+              onResponderMove={onSeek}
+              onResponderRelease={onSeekRelease}
+              onResponderTerminate={onSeekRelease}
+            />
+          ) : null
         }
         <View style={[
           styles.seekBarBackground,
