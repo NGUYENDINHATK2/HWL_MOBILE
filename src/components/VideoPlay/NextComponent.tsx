@@ -21,26 +21,14 @@ const NextComponent: FunctionComponent<Props> = (props) => {
 
   return (
     <Pressable
-      onPress={null}
+      onPress={singleTap}
       style={[styles.backContainer]}>
-      <TapGestureHandler
-        waitFor={doubleTapRef}
-        onActivated={singleTap}
-      >
-        <TapGestureHandler
-          maxDelayMs={300}
-          ref={doubleTapRef}
-          numberOfTaps={2}
-          onActivated={doubleTap}
-        >
           <View style={[styles.backContent]}>
             <Image
               source={IconNext}
               style={[styles.iconBackNext]}
             />
           </View>
-        </TapGestureHandler>
-      </TapGestureHandler>
     </Pressable>
   );
 }

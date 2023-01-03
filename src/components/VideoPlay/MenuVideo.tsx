@@ -14,11 +14,22 @@ interface Props {
     setIsPaused: (value: boolean) => void;
     isMuted: boolean;
     setIsMuted: (value: boolean) => void;
-
+    undoVideo: (timeUndo: any) => void;
+    redoVideo: (timeRedo: any) => void;
 }
 import styles from './style';
 const MenuVideo: FunctionComponent<Props> = (props) => {
-    const { durationVideo,currentTime,isShowMenu,isMuted,setIsMuted, setIsShowMenu, isPaused, setIsPaused } = props;
+    const { durationVideo,
+        currentTime,
+        isShowMenu,
+        isMuted,
+        setIsMuted,
+        setIsShowMenu,
+        isPaused,
+        setIsPaused,
+        undoVideo,
+        redoVideo
+    } = props;
     return (
         <View style={[styles.menuContainer]}>
             <BackComponent
@@ -35,10 +46,12 @@ const MenuVideo: FunctionComponent<Props> = (props) => {
             />
             {/* menu bottom */}
             <MenuBottom
-                durationVideo = {durationVideo}
-                currentTime = {currentTime}
+                durationVideo={durationVideo}
+                currentTime={currentTime}
                 isMuted={isMuted}
                 setIsMuted={setIsMuted}
+                undoVideo={undoVideo}
+                redoVideo={redoVideo}
             />
         </View>
     );

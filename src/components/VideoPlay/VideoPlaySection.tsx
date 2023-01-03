@@ -62,7 +62,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     setIsPlaying(true);
     setIsPaused(false);
   }
-  const onSeekBarLayout = ({nativeEvent}:any) => {
+  const onSeekBarLayout = ({ nativeEvent }: any) => {
     console.log('onSeekBarLayout');
     setSeekBarWidth(nativeEvent.layout.width);
   }
@@ -79,20 +79,8 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     setCurrentTime(getDurationTime(event.currentTime));
     setProgress(event.currentTime / duration);
   }
-  const onSeekEvent = (event: any) => { 
+  const onSeekEvent = (event: any) => {
     setCurrentTime(getDurationTime(event.currentTime));
-  }
-  const renderMenu = () => {
-    return isShowMenu && <MenuVideo
-      durationVideo={durationVideo}
-      currentTime={currentTime}
-      isPaused={isPaused}
-      setIsPaused={setIsPaused}
-      isShowMenu={isShowMenu}
-      setIsShowMenu={setIsShowMenu}
-      isMuted={isMuted}
-      setIsMuted={setIsMuted}
-    />
   }
   const onSeekStartResponder = () => {
     return true;
@@ -106,7 +94,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   }
   const onSeek = (e: any) => {
     console.log('onSeek');
-    const diff=e.nativeEvent.pageX - seekTouchStart;
+    const diff = e.nativeEvent.pageX - seekTouchStart;
     const ratio = 120 / seekBarWidth;
     const seekProgress = seekProgressStart + ((diff * ratio) / 120);
     setProgress(seekProgress);
@@ -116,6 +104,12 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     console.log('onSeekRelease');
     // setIsSeeking(false);
     // setIsPaused(false);
+  }
+  const undoVideo = (timeUndo: any) => {
+    console.log('undoVideo');
+  }
+  const redoVideo = (timeRedo: any) => {
+    console.log('redoVideo');
   }
   const renderSeekBar = (fullWidth: boolean) => {
     return (
@@ -153,6 +147,20 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
         ]} />
       </View>
     );
+  }
+  const renderMenu = () => {
+    return isShowMenu && <MenuVideo
+      durationVideo={durationVideo}
+      currentTime={currentTime}
+      isPaused={isPaused}
+      setIsPaused={setIsPaused}
+      isShowMenu={isShowMenu}
+      setIsShowMenu={setIsShowMenu}
+      isMuted={isMuted}
+      setIsMuted={setIsMuted}
+      undoVideo={undoVideo}
+      redoVideo={redoVideo}
+    />
   }
 
   return (

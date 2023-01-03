@@ -33,6 +33,7 @@ const MainNavigation: FunctionComponent<Props> = (props) => {
                 drawerActiveBackgroundColor: colors.violetDark,
                 drawerActiveTintColor: colors.pinkPastel,
                 drawerInactiveTintColor: colors.white,
+                swipeEnabled: false,
             }}
             drawerContent={(props) => <CustomDrawer {...props} />}
         >

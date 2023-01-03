@@ -29,11 +29,17 @@ const TitleNeon = styled.Text`
 import Loading from '../assets/json/lf30_editor_mqh2qjpr.json'
 
 interface Props { }
-
+let token=''
 const WelcomeScreen: FunctionComponent = () => {
   const navigation = useNavigation<WelcomeNavigationProps['navigation']>();
   React.useEffect(() => {
-    setTimeout(() => navigation.navigate('Auth'), 2000);
+    setTimeout(() => {
+      if (token) {
+        navigation.navigate('Main');
+      } else {
+        navigation.navigate('Auth');
+      }
+    }, 2000);
   }, []);
   return (
     <WelcomeScreenContainer>

@@ -34,6 +34,11 @@ const styles = StyleSheet.create({
     },
     timeContainer:{
         alignItems:'center',
+        flexDirection:'row',
+    },
+    unredoContainer:{
+        flexDirection:'row',
+        alignItems:'center',
     },
     menuBottomContainer:{
         flexDirection:'row',
