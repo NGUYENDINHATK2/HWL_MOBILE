@@ -29,6 +29,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   const [isPlaying, setIsPlaying] = React.useState<boolean>(true);
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
   const [isMuted, setIsMuted] = React.useState<boolean>(false);
+  const [isEnded, setIsEnded] = React.useState<boolean>(false);
   const [isSeeking, setIsSeeking] = React.useState<boolean>(false);
   const [durationVideo, setDurationVideo] = React.useState<any>(0);
   const [progress, setProgress] = React.useState<any>(0);
@@ -37,26 +38,21 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   const [seekTouchStart, setSeekTouchStart] = React.useState<any>(0);
   const [seekBarWidth, setSeekBarWidth] = React.useState<any>(400);
   const [seekProgressStart, setSeekProgressStart] = React.useState<any>(0);
+  const [widthVideo, setWidthVideo] = React.useState<any>(0);
+  const [heightVideo, setHeightVideo] = React.useState<any>(0);
+  const [resizeModeVideo, setResizeModeVideo] = React.useState<any>('contain');
   const handlePressShowMenu = () => { setIsShowMenu(!isShowMenu) }
-  // React.useEffect(() => {
-  //   if (isShowMenu) {
-  //     setTimeout(() => {
-  //       setIsShowMenu(false);
-  //     }, 2000);
-  //   }
-  // }, [isShowMenu]);
-  // React.useEffect(() => {
-  //   // set all state to default
-  //   setIsPlaying(false);
-  //   setIsPaused(true);
-  //   setIsMuted(false);
-  //   setDurationVideo(0);
-  //   setProgress(0);
-  //   setDuration(0);
-  //   setCurrentTime(0);
-  // },[])
+  React.useEffect(() => {
+    if (isShowMenu) {
+      setTimeout(() => {
+        setIsShowMenu(false);
+      }, 4000);
+    }
+  }, [isShowMenu]);
   const onLoad = (event: any) => {
     console.log('onLoad');
+    setWidthVideo(event.naturalSize.width);
+    setHeightVideo(event.naturalSize.height);
     setDuration(event.duration)
     setDurationVideo(getDurationTime(event.duration));
     setIsPlaying(true);
@@ -69,13 +65,23 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   const onEndVideo = () => {
     console.log('onEndVideo');
     setCurrentTime(durationVideo);
-    setProgress(1);
-    setIsPlaying(false);
     setIsPaused(true);
+    setIsEnded(true);
     setIsShowMenu(true);
     // player.current?.seek(0);
   }
+  const replayVideo = () => {
+    console.log('replayVideo');
+    setIsEnded(false);
+    setIsPaused(false);
+    setProgress(0);
+    player.current?.seek(0);
+
+  }
   const onProgress = (event: any) => {
+    if (isSeeking) {
+      return;
+    }
     setCurrentTime(getDurationTime(event.currentTime));
     setProgress(event.currentTime / duration);
   }
@@ -95,21 +101,27 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   const onSeek = (e: any) => {
     console.log('onSeek');
     const diff = e.nativeEvent.pageX - seekTouchStart;
-    const ratio = 120 / seekBarWidth;
-    const seekProgress = seekProgressStart + ((diff * ratio) / 120);
+    const ratio = 100 / seekBarWidth;
+    const seekProgress = seekProgressStart + ((diff * ratio) / 100);
     setProgress(seekProgress);
     player.current?.seek(progress * duration);
   }
   const onSeekRelease = () => {
     console.log('onSeekRelease');
-    // setIsSeeking(false);
-    // setIsPaused(false);
+    setIsSeeking(false);
+    setIsPaused(false);
+
   }
   const undoVideo = (timeUndo: any) => {
-    console.log('undoVideo');
+    setIsEnded(false);
+    const progressUndo = progress - (timeUndo / duration);
+    setProgress(progressUndo);
+    progressUndo > 0 ? player.current?.seek(progressUndo * duration) : player.current?.seek(0);
   }
   const redoVideo = (timeRedo: any) => {
-    console.log('redoVideo');
+    const progressRedo = progress + (timeRedo / duration);
+    setProgress(progressRedo);
+    progressRedo < 1 ? player.current?.seek(progressRedo * duration) : player.current?.seek(duration);
   }
   const renderSeekBar = (fullWidth: boolean) => {
     return (
@@ -131,6 +143,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
             <View
               style={[
                 styles.seekBarKnob,
+                isSeeking ? { transform: [{ scale: 1 }], backgroundColor: 'yellow' } : {},
               ]}
               hitSlop={{ top: 20, bottom: 20, left: 10, right: 20 }}
               onStartShouldSetResponder={onSeekStartResponder}
@@ -160,6 +173,9 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
       setIsMuted={setIsMuted}
       undoVideo={undoVideo}
       redoVideo={redoVideo}
+      isEnded={isEnded}
+      setIsEnded={setIsEnded}
+      replayVideo={replayVideo}
     />
   }
 
@@ -171,9 +187,9 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
       <Video
         style={styles.backgroundVideo}
         ref={player}
-        source={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
+        source={props.video}
         muted={isMuted}
-        resizeMode="cover"
+        resizeMode={resizeModeVideo}
         paused={isPaused
           ? isPaused || isPlaying
           : !isPlaying}
@@ -181,6 +197,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
         onEnd={onEndVideo}
         onProgress={onProgress}
         onSeek={onSeekEvent}
+      // repeat
       />
       {isShowMenu ? renderMenu() : null}
       {renderSeekBar(true)}

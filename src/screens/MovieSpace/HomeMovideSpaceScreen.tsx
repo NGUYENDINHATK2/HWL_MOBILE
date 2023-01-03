@@ -22,10 +22,21 @@ const HomeMovideSpaceScreen: FunctionComponent<Props> = () => {
   return (
     <HomeMovideSpaceScreenContainer >
       <VideoContainer>
-        <VideoPlaySection />
+        <VideoPlaySection
+          video={{
+            uri: 'http://192.168.125.81:8000/videos/63a2c5b26c5f9.mp4'
+          }}
+        />
+      </VideoContainer>
+      <VideoContainer>
+        <VideoPlaySection
+          video={{
+            uri: 'http://192.168.125.81:8000/videos/63a2ca04a7931.mp4'
+          }}
+        />
       </VideoContainer>
       <VideoPlayer
-        video={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4'}}
+        video={{ uri: 'http://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4' }}
         videoWidth={1600}
         videoHeight={900}
         thumbnail={{ uri: 'https://i.picsum.photos/id/866/1600/900.jpg' }}

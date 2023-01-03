@@ -16,6 +16,9 @@ interface Props {
     setIsMuted: (value: boolean) => void;
     undoVideo: (timeUndo: any) => void;
     redoVideo: (timeRedo: any) => void;
+    isEnded: boolean;
+    setIsEnded: (value: boolean) => void;
+    replayVideo: () => void;
 }
 import styles from './style';
 const MenuVideo: FunctionComponent<Props> = (props) => {
@@ -28,7 +31,10 @@ const MenuVideo: FunctionComponent<Props> = (props) => {
         isPaused,
         setIsPaused,
         undoVideo,
-        redoVideo
+        redoVideo,
+        isEnded,
+        setIsEnded,
+        replayVideo,
     } = props;
     return (
         <View style={[styles.menuContainer]}>
@@ -39,6 +45,9 @@ const MenuVideo: FunctionComponent<Props> = (props) => {
             <PlayComponent
                 isPaused={isPaused}
                 setIsPaused={setIsPaused}
+                isEnded={isEnded}
+                setIsEnded={setIsEnded}
+                replayVideo={replayVideo}
             />
             <NextComponent
                 isShowMenu={isShowMenu}

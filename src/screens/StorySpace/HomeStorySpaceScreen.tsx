@@ -124,6 +124,7 @@ const HomeStorySpaceScreen: FunctionComponent<Props> = () => {
       chapter: '2'
     },
   ];
+  
 
   return loading ? <ModalLoading /> : (
     <HomeStorySpaceScreenContainer>

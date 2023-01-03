@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         marginLeft: -10,
         marginRight: -5,
+        paddingVertical: 5,
       },
       seekBarFullWidth: {
         marginLeft: 0,

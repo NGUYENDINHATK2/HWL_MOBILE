@@ -8,6 +8,7 @@ interface Props {
     setIsMuted: (value: boolean) => void;
     undoVideo: (timeUndo: any) => void;
     redoVideo: (timeRedo: any) => void;
+    
 }
 import ZoomIn from './Icon/zoom-in.png'
 import VolumeUp from './Icon/volume-up.png'
