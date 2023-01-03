@@ -35,9 +35,13 @@ const styles = StyleSheet.create({
     timeContainer:{
         alignItems:'center',
     },
+    menuBottomContainer:{
+        flexDirection:'row',
+    },
     iconZoomIn:{
         width:25,
         height:25,
+        marginHorizontal:5,
     },
     timeText:{
         color:'#fff',
@@ -64,12 +68,12 @@ const styles = StyleSheet.create({
         justifyContent:'center',
     },
     iconPlay:{
-        width:50,
-        height:50,
+        width:40,
+        height:40,
     },
     iconBackNext:{
-        width:25,
-        height:25,
+        width:20,
+        height:20,
     },
     seekBar: {
         alignItems: 'center',

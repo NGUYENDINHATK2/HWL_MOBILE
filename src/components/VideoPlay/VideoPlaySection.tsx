@@ -34,6 +34,9 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   const [progress, setProgress] = React.useState<any>(0);
   const [duration, setDuration] = React.useState<any>(0);
   const [currentTime, setCurrentTime] = React.useState<any>(0);
+  const [seekTouchStart, setSeekTouchStart] = React.useState<any>(0);
+  const [seekBarWidth, setSeekBarWidth] = React.useState<any>(400);
+  const [seekProgressStart, setSeekProgressStart] = React.useState<any>(0);
   const handlePressShowMenu = () => { setIsShowMenu(!isShowMenu) }
   // React.useEffect(() => {
   //   if (isShowMenu) {
@@ -59,6 +62,10 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     setIsPlaying(true);
     setIsPaused(false);
   }
+  const onSeekBarLayout = ({nativeEvent}:any) => {
+    console.log('onSeekBarLayout');
+    setSeekBarWidth(nativeEvent.layout.width);
+  }
   const onEndVideo = () => {
     console.log('onEndVideo');
     setCurrentTime(durationVideo);
@@ -66,12 +73,15 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     setIsPlaying(false);
     setIsPaused(true);
     setIsShowMenu(true);
+    // player.current?.seek(0);
   }
   const onProgress = (event: any) => {
     setCurrentTime(getDurationTime(event.currentTime));
-    setProgress(event.currentTime / duration,);
+    setProgress(event.currentTime / duration);
   }
-  const onSeekEvent = (event: any) => { }
+  const onSeekEvent = (event: any) => { 
+    setCurrentTime(getDurationTime(event.currentTime));
+  }
   const renderMenu = () => {
     return isShowMenu && <MenuVideo
       durationVideo={durationVideo}
@@ -80,6 +90,8 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
       setIsPaused={setIsPaused}
       isShowMenu={isShowMenu}
       setIsShowMenu={setIsShowMenu}
+      isMuted={isMuted}
+      setIsMuted={setIsMuted}
     />
   }
   const onSeekStartResponder = () => {
@@ -87,19 +99,23 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   }
   const onSeekGrant = (e: any) => {
     console.log('onSeekGrant');
+    setSeekTouchStart(e.nativeEvent.pageX);
+    setSeekProgressStart(progress);
     setIsSeeking(true);
     setIsPaused(true);
   }
   const onSeek = (e: any) => {
     console.log('onSeek');
-   
+    const diff=e.nativeEvent.pageX - seekTouchStart;
+    const ratio = 120 / seekBarWidth;
+    const seekProgress = seekProgressStart + ((diff * ratio) / 120);
+    setProgress(seekProgress);
+    player.current?.seek(progress * duration);
   }
   const onSeekRelease = () => {
     console.log('onSeekRelease');
-    setIsSeeking(false);
-    setIsPaused(false);
-    // player.current?.seek(progress * duration);
-
+    // setIsSeeking(false);
+    // setIsPaused(false);
   }
   const renderSeekBar = (fullWidth: boolean) => {
     return (
@@ -108,6 +124,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
           styles.seekBar,
           fullWidth ? styles.seekBarFullWidth : {},
         ]}
+        onLayout={onSeekBarLayout}
       >
         <View
           style={[
@@ -120,7 +137,6 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
             <View
               style={[
                 styles.seekBarKnob,
-
               ]}
               hitSlop={{ top: 20, bottom: 20, left: 10, right: 20 }}
               onStartShouldSetResponder={onSeekStartResponder}
