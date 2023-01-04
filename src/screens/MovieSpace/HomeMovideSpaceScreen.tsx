@@ -27,7 +27,11 @@ const HomeMovideSpaceScreen: FunctionComponent<Props> = () => {
             uri: 'http://192.168.125.81:8000/videos/63a2c5b26c5f9.mp4'
           }}
           onEnd={() => console.log('onEnd')}
-          autoplay={true}
+          autoplay={false}
+          hidenControls={false}
+          resizeModeThumbnail={'contain'}
+          thumbnail={{ uri: 'https://tinhocdaiviet.com/wp-content/uploads/Genshin-Impact-Se-Duoc-Chuyen-The-Thanh-Anime-1.jpg' }}
+          endThumbnail={{ uri: 'https://tinhocdaiviet.com/wp-content/uploads/Genshin-Impact-Se-Duoc-Chuyen-The-Thanh-Anime-1.jpg' }}
         />
       </VideoContainer>
       <VideoContainer>

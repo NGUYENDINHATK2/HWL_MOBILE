@@ -57,7 +57,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     setHeightVideo(event.naturalSize.height);
     setDuration(event.duration)
     setDurationVideo(getDurationTime(event.duration));
-    setIsPlaying(props.autoplay|| false);
+    setIsPlaying(props.autoplay || false);
     setIsPaused(false);
     setIsEnded(false);
   }
@@ -162,21 +162,23 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     );
   }
   const renderMenu = () => {
-    return isShowMenu && <MenuVideo
-      durationVideo={durationVideo}
-      currentTime={currentTime}
-      isPaused={isPaused}
-      setIsPaused={setIsPaused}
-      isShowMenu={isShowMenu}
-      setIsShowMenu={setIsShowMenu}
-      isMuted={isMuted}
-      setIsMuted={setIsMuted}
-      undoVideo={undoVideo}
-      redoVideo={redoVideo}
-      isEnded={isEnded}
-      setIsEnded={setIsEnded}
-      replayVideo={replayVideo}
-    />
+    return props?.hidenControls ? null : (
+      isShowMenu && <MenuVideo
+        durationVideo={durationVideo}
+        currentTime={currentTime}
+        isPaused={isPaused}
+        setIsPaused={setIsPaused}
+        isShowMenu={isShowMenu}
+        setIsShowMenu={setIsShowMenu}
+        isMuted={isMuted}
+        setIsMuted={setIsMuted}
+        undoVideo={undoVideo}
+        redoVideo={redoVideo}
+        isEnded={isEnded}
+        setIsEnded={setIsEnded}
+        replayVideo={replayVideo}
+      />
+    )
   }
   const thumbnailVideo = () => {
     return (
@@ -184,6 +186,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
         <Image
           style={styles.thumbnailVideo}
           source={props.thumbnail}
+          resizeMode={props.resizeModeThumbnail || 'cover'}
         />
         <TouchableOpacity
           onPress={() => setIsPlaying(true)}
@@ -202,6 +205,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
         <Image
           style={styles.thumbnailVideo}
           source={props.endThumbnail}
+          resizeMode={props.resizeModeThumbnail || 'cover'}
         />
         <TouchableOpacity
           onPress={replayVideo}

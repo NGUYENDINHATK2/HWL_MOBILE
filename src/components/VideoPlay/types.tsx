@@ -11,5 +11,6 @@ export interface VideoPlayProps {
     thumbnail?: { uri?: string | undefined, headers?: { [key: string]: string } | undefined, type?: string | undefined } | number;
     showDuration?: boolean | undefined;
     endThumbnail ?: { uri?: string | undefined, headers?: { [key: string]: string } | undefined, type?: string | undefined } | number;
-
+    hidenControls?: boolean | undefined;
+    resizeModeThumbnail?: 'cover' | 'contain' | 'stretch' | 'repeat' | 'center' | undefined;
 }
