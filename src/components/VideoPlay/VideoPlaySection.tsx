@@ -1,11 +1,13 @@
 import React, { FunctionComponent } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { View, Text, Pressable, Image, ImageBackground, TouchableOpacity } from 'react-native';
 import Video from 'react-native-video';
 import VideoPlayer from 'react-native-video-player';
 // ?types
 import { VideoPlayProps } from './types';
 import styles, { customStyles } from './style';
 import MenuVideo from './MenuVideo';
+import IconPlay from './Icon/play.png';
+import IconReplay from './Icon/replay.png';
 const getDurationTime = (duration: any) => {
   const padTimeValueString = (value: any) => value.toString().padStart(2, '0');
 
@@ -26,10 +28,11 @@ const getDurationTime = (duration: any) => {
 const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
   const player = React.useRef<Video>(null);
   const [isShowMenu, setIsShowMenu] = React.useState<boolean>(false);
-  const [isPlaying, setIsPlaying] = React.useState<boolean>(true);
+  const [isPlaying, setIsPlaying] = React.useState<boolean>(false);
   const [isPaused, setIsPaused] = React.useState<boolean>(false);
   const [isMuted, setIsMuted] = React.useState<boolean>(false);
   const [isEnded, setIsEnded] = React.useState<boolean>(false);
+  const [isRepeat, setIsRepeat] = React.useState<boolean>(false);
   const [isSeeking, setIsSeeking] = React.useState<boolean>(false);
   const [durationVideo, setDurationVideo] = React.useState<any>(0);
   const [progress, setProgress] = React.useState<any>(0);
@@ -50,30 +53,30 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     }
   }, [isShowMenu]);
   const onLoad = (event: any) => {
-    console.log('onLoad');
     setWidthVideo(event.naturalSize.width);
     setHeightVideo(event.naturalSize.height);
     setDuration(event.duration)
     setDurationVideo(getDurationTime(event.duration));
-    setIsPlaying(true);
+    setIsPlaying(props.autoplay|| false);
     setIsPaused(false);
+    setIsEnded(false);
   }
   const onSeekBarLayout = ({ nativeEvent }: any) => {
-    console.log('onSeekBarLayout');
     setSeekBarWidth(nativeEvent.layout.width);
   }
   const onEndVideo = () => {
-    console.log('onEndVideo');
     setCurrentTime(durationVideo);
     setIsPaused(true);
     setIsEnded(true);
     setIsShowMenu(true);
+    setProgress(1);
+    props.onEnd && props.onEnd();
     // player.current?.seek(0);
   }
   const replayVideo = () => {
-    console.log('replayVideo');
     setIsEnded(false);
     setIsPaused(false);
+    setIsPlaying(true);
     setProgress(0);
     player.current?.seek(0);
 
@@ -92,14 +95,12 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     return true;
   }
   const onSeekGrant = (e: any) => {
-    console.log('onSeekGrant');
     setSeekTouchStart(e.nativeEvent.pageX);
     setSeekProgressStart(progress);
     setIsSeeking(true);
     setIsPaused(true);
   }
   const onSeek = (e: any) => {
-    console.log('onSeek');
     const diff = e.nativeEvent.pageX - seekTouchStart;
     const ratio = 100 / seekBarWidth;
     const seekProgress = seekProgressStart + ((diff * ratio) / 100);
@@ -107,10 +108,9 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
     player.current?.seek(progress * duration);
   }
   const onSeekRelease = () => {
-    console.log('onSeekRelease');
     setIsSeeking(false);
     setIsPaused(false);
-
+    setIsEnded(false);
   }
   const undoVideo = (timeUndo: any) => {
     setIsEnded(false);
@@ -178,7 +178,42 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
       replayVideo={replayVideo}
     />
   }
-
+  const thumbnailVideo = () => {
+    return (
+      <View style={styles.thumbnailVideo}>
+        <Image
+          style={styles.thumbnailVideo}
+          source={props.thumbnail}
+        />
+        <TouchableOpacity
+          onPress={() => setIsPlaying(true)}
+          style={styles.thumbnailVideoPlay}>
+          <Image
+            source={IconPlay}
+            style={[styles.iconPlay]}
+          />
+        </TouchableOpacity>
+      </View>
+    )
+  }
+  const thumbnailVideoEnded = () => {
+    return (
+      <View style={styles.thumbnailVideo}>
+        <Image
+          style={styles.thumbnailVideo}
+          source={props.endThumbnail}
+        />
+        <TouchableOpacity
+          onPress={replayVideo}
+          style={styles.thumbnailVideoPlay}>
+          <Image
+            source={IconReplay}
+            style={[styles.iconPlay]}
+          />
+        </TouchableOpacity>
+      </View>
+    )
+  }
   return (
     <Pressable
       style={[styles.container]}
@@ -189,7 +224,7 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
         ref={player}
         source={props.video}
         muted={isMuted}
-        resizeMode={resizeModeVideo}
+        resizeMode={props.resizeMode || resizeModeVideo}
         paused={isPaused
           ? isPaused || isPlaying
           : !isPlaying}
@@ -197,10 +232,16 @@ const VideoPlaySection: FunctionComponent<VideoPlayProps> = (props) => {
         onEnd={onEndVideo}
         onProgress={onProgress}
         onSeek={onSeekEvent}
-      // repeat
+        repeat={props.repeat || false}
       />
       {isShowMenu ? renderMenu() : null}
       {renderSeekBar(true)}
+      {
+        isPlaying ? null : thumbnailVideo()
+      }
+      {
+        isEnded ? thumbnailVideoEnded() : null
+      }
     </Pressable>
   );
 }

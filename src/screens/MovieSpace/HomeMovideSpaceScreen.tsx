@@ -26,12 +26,25 @@ const HomeMovideSpaceScreen: FunctionComponent<Props> = () => {
           video={{
             uri: 'http://192.168.125.81:8000/videos/63a2c5b26c5f9.mp4'
           }}
+          onEnd={() => console.log('onEnd')}
+          autoplay={true}
         />
       </VideoContainer>
       <VideoContainer>
         <VideoPlaySection
           video={{
             uri: 'http://192.168.125.81:8000/videos/63a2ca04a7931.mp4'
+          }}
+          repeat={true}
+          resizeMode={'contain'}
+          thumbnail={{ uri: 'https://images.pexels.com/photos/414102/pexels-photo-414102.jpeg?cs=srgb&dl=pexels-pixabay-414102.jpg&fm=jpg' }}
+          endThumbnail={{ uri: 'https://images.pexels.com/photos/414102/pexels-photo-414102.jpeg?cs=srgb&dl=pexels-pixabay-414102.jpg&fm=jpg' }}
+        />
+      </VideoContainer>
+      <VideoContainer>
+        <VideoPlaySection
+          video={{
+            uri: 'http://192.168.125.81:8000/videos/637633588aa27.mp4'
           }}
         />
       </VideoContainer>
